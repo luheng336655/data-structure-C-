@@ -1,21 +1,21 @@
-//Êı¾İ½á¹¹³éÏóÊı¾İÀàĞÍ£º¼ÆËãÔ²Ãæ»ıarea¡¢ÖÜ³¤peri
+//æ•°æ®ç»“æ„æŠ½è±¡æ•°æ®ç±»å‹ï¼šè®¡ç®—åœ†é¢ç§¯areaã€å‘¨é•¿peri
 #include <stdio.h>
-//½á¹¹Ìå
+//ç»“æ„ä½“
 typedef struct circle {
 	float r;
 	float area;
 	float peri;
 }*Circle;
-//º¯ÊıÉùÃ÷
+//å‡½æ•°å£°æ˜
 float area(Circle c);
 float peri(Circle c);
 
-//Ãæ»ı
+//é¢ç§¯
 float area(Circle c) {
 	c->area = 3.14 * c->r * c->r;
 	return c->area;
 }
-//ÖÜ³¤
+//å‘¨é•¿
 float peri(Circle c) {
 	c->peri = 2 * 3.14 * c->r;
 	return c->peri;
@@ -23,7 +23,7 @@ float peri(Circle c) {
 void main()
 {
 	struct circle a;
-	printf("ÊäÈë°ë¾¶£º\n");
+	printf("è¾“å…¥åŠå¾„ï¼š\n");
 	scanf_s("%f", &a.r);
 	printf("the aarea=%f\n", area(&a));
 	printf("the peri=%f\n", peri(&a));
