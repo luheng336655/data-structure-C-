@@ -1,0 +1,81 @@
+//标头.h
+#include <stdio.h>
+#include <math.h>
+typedef struct Complex{   //定义复数
+	float realpart;
+	float imagpart;
+}Complex;
+
+void assign(Complex* A, float real, float imag); //赋值
+void add(Complex* A, Complex z1, Complex z2); //+
+int minus(Complex* A, Complex z1, Complex z2); //-
+int multiply(Complex* A, Complex z1, Complex z2); //*
+int divide(Complex* A, Complex z1, Complex z2); //除
+
+
+
+
+//函数.c
+#include "标头.h"
+void assign(Complex* A, float real, float imag) { //赋值
+	A->realpart = real;
+	A->imagpart = imag;
+}
+
+void add(Complex* C, Complex A, Complex B) { //赋值
+	C->realpart = A.realpart + B.realpart;
+	C->imagpart = A.imagpart + B.imagpart;
+}
+
+int minus(Complex* C, Complex A, Complex B) {
+	C->realpart = A.realpart - B.realpart;
+	C->imagpart = A.imagpart - B.imagpart;
+	return C;
+}
+
+int multiply(Complex* C, Complex A, Complex B) {
+	C->realpart = (A.realpart * B.realpart) - (A.imagpart * B.imagpart);
+	C->imagpart = (A.imagpart * B.realpart) - (A.realpart * B.imagpart);
+	return C;
+}
+
+int divide(Complex* C, Complex A, Complex B) {
+	C->realpart = ((A.realpart * B.realpart) + (A.imagpart * B.imagpart)) / ((B.realpart * B.realpart) + (B.imagpart * B.imagpart));
+	C->imagpart = ((A.imagpart * B.realpart) - (A.realpart * B.imagpart)) / ((B.realpart * B.realpart) + (B.imagpart * B.imagpart));
+	return C;
+}
+
+
+
+//源.c
+#include "标头.h"
+
+int main() {
+	float realpart, imagpart;
+	Complex A, B, C;
+	char F;
+	C.imagpart = 0, C.realpart = 0;//C初始化
+	printf("依次输入复数的实部及虚部\n");
+	scanf_s("%f %f %f %f", &A.realpart, &A.imagpart,&B.realpart,&B.imagpart);
+	assign(&A, A.realpart, A.imagpart);//A赋值
+	assign(&B, B.realpart, B.imagpart);//B赋值
+	printf("选择需要进行的计算\n");
+	rewind(stdin);//getchar()容易被上次输入的'enter'卡掉，故用此清空缓冲区
+	F = getchar();//计算符号
+	switch (F) {
+	case '+':add(&C, A, B); break;
+	case '-':minus(&C, A, B); break;
+	case '*':multiply(&C, A, B); break;
+	case '/':divide(&C, A, B); break;
+	default:printf("errror!\n");
+	}
+	if (C.imagpart >= 0)
+	{
+		printf("%f +%fi\n", C.realpart, C.imagpart);
+	}
+	else
+	{
+		printf("%f %fi\n", C.realpart, C.imagpart);
+	}
+	return 0;
+}
